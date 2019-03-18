@@ -33,10 +33,13 @@ public class GenerateKeys {
                 .multiply(q.subtract(BigInteger.ONE));
         BigInteger[] result = e.extendedEuclidean(publicKey, phi);
 
-
         while (result[0].compareTo(BigInteger.ONE) != 0) {
             publicKey = publicKey.add(BigInteger.ONE);
             result = e.extendedEuclidean(publicKey, phi);
+        }
+
+        if(publicKey.compareTo(phi) != -1){
+            throw new IllegalArgumentException();
         }
 
         BigInteger keys[] = new BigInteger[3];
