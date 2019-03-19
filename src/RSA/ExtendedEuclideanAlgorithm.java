@@ -9,13 +9,13 @@ public class ExtendedEuclideanAlgorithm {
 
         BigInteger multiplier;
         BigInteger[] vector1 =
-                {n, new BigInteger("1"), new BigInteger("0")};
+                {n, BigInteger.ONE, BigInteger.ZERO};
         BigInteger[] vector2 =
-                {a, new BigInteger("0"), new BigInteger("1")};
+                {a, BigInteger.ZERO, BigInteger.ONE};
         BigInteger[] vectorResult = new BigInteger[3];
 
         while (vector1[0].mod(vector2[0])
-                .compareTo(new BigInteger("0")) != 0) {
+                .compareTo(BigInteger.ZERO) != 0) {
             multiplier = vector1[0].divide(vector2[0]);
             for (int i = 0; i < 3; ++i) {
                 vectorResult[i] = vector1[i]

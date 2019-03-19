@@ -38,7 +38,7 @@ public class GenerateKeys {
             result = e.extendedEuclidean(publicKey, phi);
         }
 
-        if(publicKey.compareTo(phi) != -1){
+        if(publicKey.compareTo(p.multiply(q)) != -1){
             throw new IllegalArgumentException();
         }
 
