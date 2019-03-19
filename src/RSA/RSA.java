@@ -35,7 +35,7 @@ public class RSA {
                                        BigInteger minPubKey) {
         System.out.println(
                 "Generating keys with minimum public key size " +
-                        minPubKey);
+                        minPubKey + "...");
 
         BigInteger[] keys =
                 generateKeys.generateKeyPair(p, q, minPubKey);
@@ -54,7 +54,7 @@ public class RSA {
     public BigInteger[] keysFromMinVal(BigInteger minPrime,
                                        BigInteger minPubKey) {
         System.out
-                .println("Generating primes greater than " + minPrime);
+                .println("Generating primes greater than " + minPrime + "...");
 
         BigInteger p = generatePrimes.generatePrime(minPrime);
         Random r = new Random();
@@ -70,6 +70,7 @@ public class RSA {
     }
 
     public BigInteger encrypt(BigInteger message) {
+        System.out.println("Encrypting...");
         BigInteger N =
                 exponentMod.exponentMod(message, publicKey, modulus);
         System.out.println(message);
@@ -81,6 +82,7 @@ public class RSA {
 
     public BigInteger encrypt(BigInteger message, BigInteger pubKey,
                               BigInteger mod) {
+        System.out.println("Encrypting...");
         BigInteger N = exponentMod.exponentMod(message, pubKey, mod);
         System.out.println(message);
         System.out.println("Encrypts to");
@@ -90,6 +92,7 @@ public class RSA {
     }
 
     public BigInteger decrypt(BigInteger cipherText) {
+        System.out.println("Decrypting...");
         BigInteger M = exponentMod
                 .exponentMod(cipherText, privateKey, modulus);
         System.out.println(cipherText);
@@ -102,6 +105,7 @@ public class RSA {
     public BigInteger decrypt(BigInteger cipherText,
                               BigInteger privateKey,
                               BigInteger modulus) {
+        System.out.println("Decrypting...");
         BigInteger M = exponentMod
                 .exponentMod(cipherText, privateKey, modulus);
         System.out.println(cipherText);
@@ -133,13 +137,16 @@ public class RSA {
 
     public BigInteger[] getPrivateKey(BigInteger pubKey,
                                       BigInteger mod) {
+        System.out.println("Cracking modulus...");
+        long start = System.currentTimeMillis();
         BigInteger[] primes = factorModulus.fermats(mod);
         BigInteger p = primes[0];
         BigInteger q = primes[1];
         BigInteger privateKey =
                 generateKeys.generatePrivateKey(p, q, pubKey);
+        double elapsedSeconds =
+                (System.currentTimeMillis() - start)/1000.0;
 
-        BigInteger[] result = {pubKey, privateKey, mod, p, q};
 
         System.out.println("The modulus " + mod + " has factors:");
         System.out.println("p = " + p);
@@ -147,11 +154,16 @@ public class RSA {
         System.out.println("The private key corresponding to the " +
                 "public key " + pubKey + " is:");
         System.out.println(privateKey);
+        System.out.println("It took " + elapsedSeconds + " seconds to" +
+                " find " +
+                "the private key");
 
+        BigInteger[] result = {pubKey, privateKey, mod, p, q};
         return result;
     }
 
-    public BigInteger[] crackModulus(BigInteger mod){
+    public BigInteger[] crackModulus(BigInteger mod) {
+        System.out.println("Cracking modulus...");
         BigInteger[] primes = factorModulus.fermats(mod);
         BigInteger p = primes[0];
         BigInteger q = primes[1];
@@ -167,9 +179,11 @@ public class RSA {
     public static void main(String[] args) {
         // Generate keys given minimum prime number value and minimum
         // public key value. Encrypt and Decrypt message using keys.
+        BigInteger minPrimeSize = BigInteger.valueOf(1000000);
+        BigInteger minPubKeySize = BigInteger.valueOf(50000);
         RSA r = new RSA();
-        r.keysFromMinVal(BigInteger.valueOf(100000),
-                BigInteger.valueOf(50000));
+
+        r.keysFromMinVal(minPrimeSize, minPubKeySize);
         BigInteger N = r.encrypt(BigInteger.valueOf(1234567890));
         r.decrypt(N);
 
