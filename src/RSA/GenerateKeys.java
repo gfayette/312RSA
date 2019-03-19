@@ -9,9 +9,11 @@ public class GenerateKeys {
         e = new ExtendedEuclideanAlgorithm();
     }
 
-    public BigInteger generatePrivateKey(BigInteger pubKey,
-                                         BigInteger phi) {
-        return e.extendedEuclidean(phi, pubKey)[2];
+    public BigInteger generatePrivateKey(BigInteger p, BigInteger q,
+                                         BigInteger pubKey) {
+        BigInteger phi = p.subtract(BigInteger.ONE)
+                .multiply(q.subtract(BigInteger.ONE));
+        return e.extendedEuclidean(pubKey, phi)[2];
     }
 
     public BigInteger generatePublicKey(BigInteger p, BigInteger q) {
@@ -38,11 +40,11 @@ public class GenerateKeys {
             result = e.extendedEuclidean(publicKey, phi);
         }
 
-        if(publicKey.compareTo(p.multiply(q)) != -1){
+        if (publicKey.compareTo(p.multiply(q)) != -1) {
             throw new IllegalArgumentException();
         }
 
-        BigInteger keys[] = new BigInteger[3];
+        BigInteger[] keys = new BigInteger[3];
         keys[0] = publicKey;
         keys[1] = result[2];
         keys[2] = p.multiply(q);
@@ -50,7 +52,7 @@ public class GenerateKeys {
         return keys;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         GenerateKeys g = new GenerateKeys();
 
         BigInteger p = new BigInteger("59");
@@ -62,4 +64,5 @@ public class GenerateKeys {
         System.out.println(keys[1]);
         System.out.println(keys[2]);
     }
+
 }

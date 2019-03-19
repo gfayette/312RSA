@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class FactorModulus {
+
     public BigInteger[] fermats(BigInteger n) {
         BigInteger a = BigInteger.ZERO;
         BigInteger b = BigInteger.ZERO;
@@ -28,7 +29,7 @@ public class FactorModulus {
             System.out.println("Error");
         }
 
-        return new BigInteger[] {a.add(b),a.subtract(b)};
+        return new BigInteger[] {a.subtract(b), a.add(b)};
     }
 
 

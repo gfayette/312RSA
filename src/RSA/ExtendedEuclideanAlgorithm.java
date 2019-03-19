@@ -37,7 +37,7 @@ public class ExtendedEuclideanAlgorithm {
         return vector2;
     }
 
-    public void displayMultiplicativeInverse(BigInteger a,
+    private void displayMultiplicativeInverse(BigInteger a,
                                              BigInteger n) {
         try {
             BigInteger[] result = extendedEuclidean(a, n);
@@ -68,7 +68,7 @@ public class ExtendedEuclideanAlgorithm {
 
     }
 
-    public void displayMultiplicativeInverse() {
+    private void displayMultiplicativeInverse() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the multiplier");
@@ -80,7 +80,7 @@ public class ExtendedEuclideanAlgorithm {
         displayMultiplicativeInverse(a, n);
     }
 
-    public void displayInverseEquation(BigInteger a, BigInteger b,
+    private void displayInverseEquation(BigInteger a, BigInteger b,
                                        BigInteger modulus) {
         try {
             BigInteger[] result = extendedEuclidean(a, modulus);
@@ -102,7 +102,7 @@ public class ExtendedEuclideanAlgorithm {
         }
     }
 
-    public void displayInverseEquation() {
+    private void displayInverseEquation() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the modulus");

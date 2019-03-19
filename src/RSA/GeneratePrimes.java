@@ -37,7 +37,7 @@ public class GeneratePrimes {
         return generatePrimes(min, 1)[0];
     }
 
-    public boolean simpleTest(BigInteger n) {
+    private boolean simpleTest(BigInteger n) {
 
         if (n.mod(BigInteger.TWO).compareTo(BigInteger.ZERO) == 0 ||
                 n.mod(new BigInteger("3")).compareTo(BigInteger.ZERO) ==
@@ -63,8 +63,8 @@ public class GeneratePrimes {
         GeneratePrimes p = new GeneratePrimes();
         BigInteger[] result = p.generatePrimes(new BigInteger(
                 "100000000"), 10);
-        for (int i = 0; i < result.length; ++i) {
-            System.out.println(result[i]);
+        for (BigInteger prime : result) {
+            System.out.println(prime);
         }
     }
 

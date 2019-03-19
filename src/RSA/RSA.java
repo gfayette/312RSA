@@ -1,6 +1,7 @@
 package RSA;
 
 import java.math.BigInteger;
+import java.util.*;
 
 public class RSA {
     BigInteger publicKey;
@@ -56,8 +57,10 @@ public class RSA {
                 .println("Generating primes greater than " + minPrime);
 
         BigInteger p = generatePrimes.generatePrime(minPrime);
-        BigInteger q = generatePrimes
-                .generatePrime(p.multiply(BigInteger.valueOf(100)));
+        Random r = new Random();
+        BigInteger qMin = p.multiply(BigInteger
+                .valueOf((long) (100 + 900 * r.nextDouble())));
+        BigInteger q = generatePrimes.generatePrime(qMin);
 
         System.out.println("p = " + p);
         System.out.println("q = " + q);
@@ -78,7 +81,12 @@ public class RSA {
 
     public BigInteger encrypt(BigInteger message, BigInteger pubKey,
                               BigInteger mod) {
-        return exponentMod.exponentMod(message, pubKey, mod);
+        BigInteger N = exponentMod.exponentMod(message, pubKey, mod);
+        System.out.println(message);
+        System.out.println("Encrypts to");
+        System.out.println(N);
+        System.out.println();
+        return N;
     }
 
     public BigInteger decrypt(BigInteger cipherText) {
@@ -94,7 +102,13 @@ public class RSA {
     public BigInteger decrypt(BigInteger cipherText,
                               BigInteger privateKey,
                               BigInteger modulus) {
-        return exponentMod.exponentMod(cipherText, privateKey, modulus);
+        BigInteger M = exponentMod
+                .exponentMod(cipherText, privateKey, modulus);
+        System.out.println(cipherText);
+        System.out.println("Decrypts to");
+        System.out.println(M);
+        System.out.println();
+        return M;
     }
 
     public BigInteger signMessage(BigInteger message) {
@@ -117,13 +131,51 @@ public class RSA {
         return exponentMod.exponentMod(cipherText, publicKey, modulus);
     }
 
+    public BigInteger[] getPrivateKey(BigInteger pubKey,
+                                      BigInteger mod) {
+        BigInteger[] primes = factorModulus.fermats(mod);
+        BigInteger p = primes[0];
+        BigInteger q = primes[1];
+        BigInteger privateKey =
+                generateKeys.generatePrivateKey(p, q, pubKey);
 
-    public static void main(String args[]) {
+        BigInteger[] result = {pubKey, privateKey, mod, p, q};
+
+        System.out.println("The modulus " + mod + " has factors:");
+        System.out.println("p = " + p);
+        System.out.println("q = " + q);
+        System.out.println("The private key corresponding to the " +
+                "public key " + pubKey + " is:");
+        System.out.println(privateKey);
+
+        return result;
+    }
+
+    public BigInteger[] crackModulus(BigInteger mod){
+        BigInteger[] primes = factorModulus.fermats(mod);
+        BigInteger p = primes[0];
+        BigInteger q = primes[1];
+
+        System.out.println("The modulus " + mod + " has factors:");
+        System.out.println("p = " + primes[0]);
+        System.out.println("q = " + primes[1]);
+
+        return primes;
+    }
+
+
+    public static void main(String[] args) {
+        // Generate keys given minimum prime number value and minimum
+        // public key value. Encrypt and Decrypt message using keys.
         RSA r = new RSA();
-        r.keysFromMinVal(BigInteger.valueOf(1000000),
-                BigInteger.valueOf(500000));
+        r.keysFromMinVal(BigInteger.valueOf(100000),
+                BigInteger.valueOf(50000));
         BigInteger N = r.encrypt(BigInteger.valueOf(1234567890));
         r.decrypt(N);
+
+
+        r.getPrivateKey(r.publicKey, r.modulus);
+
 
     }
 }
