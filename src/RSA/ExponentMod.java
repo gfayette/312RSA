@@ -61,9 +61,9 @@ public class ExponentMod {
 
     public static void main(String[] args) {
         ExponentMod e = new ExponentMod();
-        BigInteger b = new BigInteger("123456");
-        BigInteger ex = new BigInteger("234567");
-        BigInteger m = new BigInteger("345678");
+        BigInteger b = new BigInteger("123");
+        BigInteger ex = new BigInteger("53");
+        BigInteger m = new BigInteger("197");
         System.out.println(e.exponentMod2(b, ex, m));
         System.out.println(e.exponentMod(b, ex, m));
     }

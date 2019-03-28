@@ -57,7 +57,7 @@ public class GenerateKeys {
 
         BigInteger p = new BigInteger("59");
         BigInteger q = new BigInteger("61");
-        BigInteger m = new BigInteger("2818");
+        BigInteger m = new BigInteger("179");
 
         BigInteger[] keys = g.generateKeyPair(p, q, m);
         System.out.println(keys[0]);

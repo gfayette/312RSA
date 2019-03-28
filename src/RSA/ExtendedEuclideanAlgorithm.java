@@ -5,7 +5,8 @@ import java.util.*;
 
 public class ExtendedEuclideanAlgorithm {
 
-    public BigInteger[] extendedEuclidean(BigInteger a, BigInteger n) {
+    public BigInteger[] extendedEuclidean(BigInteger a,
+                                            BigInteger n) {
 
         BigInteger multiplier;
         BigInteger[] vector1 =
@@ -58,7 +59,7 @@ public class ExtendedEuclideanAlgorithm {
                         a + " does not have a multiplicative inverse " +
                                 "modulo " + n);
                 System.out.println(
-                        "The greatest common fermats of " + n +
+                        "The greatest common factor of " + n +
                                 " and " + a + " is " + result[0]);
             }
         } catch (Exception e) {
@@ -118,6 +119,16 @@ public class ExtendedEuclideanAlgorithm {
 
     public static void main(String[] args) {
         ExtendedEuclideanAlgorithm e = new ExtendedEuclideanAlgorithm();
+        BigInteger[] result =
+                e.extendedEuclidean(new BigInteger("39"),
+                        new BigInteger("46"));
+
+
+        System.out.println(result[0]);
+        System.out.println(result[1]);
+        System.out.println(result[2]);
+
+
         e.displayMultiplicativeInverse();
         e.displayInverseEquation();
     }
