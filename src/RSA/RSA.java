@@ -304,27 +304,25 @@ public class RSA {
 
 
     public static void main(String[] args) {
-        // Generate keys given minimum prime number value and minimum
-        // public key value. Encrypt and Decrypt message using keys.
-
-        BigInteger minPrimeSize = new BigInteger("393456");
-        BigInteger minPubKeySize = new BigInteger("111");
-        RSA r = new RSA("Alice");
-
-
-        r.keysFromMinVal(minPrimeSize, minPubKeySize);
+        RSA alice = new RSA("Alice");
+        RSA bob = new RSA("Bob");
+        alice.keysFromMinVal(new BigInteger("12345678901234"),
+                new BigInteger("1234567894"));
+        bob.keysFromMinVal(new BigInteger("2234567890123"),
+                new BigInteger("123456789"));
 
 
-/*        BigInteger sig = r.signMessage(new BigInteger("555"));
-        System.out.println(sig);
-        r.verifySignature(sig, new BigInteger("555"));
+        String sharedKey = "Hello World";
 
 
-        BigInteger N = r.encrypt(new BigInteger("123456789"));
-        r.decrypt(N);
+        BigInteger cipherText =
+                alice.encryptString(sharedKey, bob.getPublicKey(),
+                        bob.getModulus());
+        BigInteger signature = alice.signMessage(cipherText);
 
-        r.getPrivateKey(r.publicKey, r.modulus);*/
 
-
+        bob.decryptString(cipherText);
+        bob.verifySignature(signature, cipherText, alice.getPublicKey(),
+                alice.getModulus());
     }
 }
