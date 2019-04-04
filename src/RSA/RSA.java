@@ -15,6 +15,7 @@ public class RSA {
     private FactorModulus factorModulus;
     private ExponentMod exponentMod;
     private ConvertNumeric convertNumeric;
+    private bitwiseXOR bitwiseXOR;
 
     public RSA(String n) {
         name = n;
@@ -23,6 +24,7 @@ public class RSA {
         factorModulus = new FactorModulus();
         exponentMod = new ExponentMod();
         convertNumeric = new ConvertNumeric();
+        bitwiseXOR = new bitwiseXOR();
     }
 
     public RSA(BigInteger pubKey, BigInteger priKey, BigInteger mod) {
@@ -31,6 +33,7 @@ public class RSA {
         factorModulus = new FactorModulus();
         exponentMod = new ExponentMod();
         convertNumeric = new ConvertNumeric();
+        bitwiseXOR = new bitwiseXOR();
 
         publicKey = pubKey;
         privateKey = priKey;
@@ -59,6 +62,11 @@ public class RSA {
 
     public void setSharedKey(BigInteger k) {
         sharedKey = k;
+    }
+
+    public void setSharedKey(String k) {
+
+        sharedKey = convertNumeric.convertToNumeric(k);
     }
 
     public String getName() {
@@ -113,20 +121,10 @@ public class RSA {
         return keysFromPrimes(p, q, minPubKey);
     }
 
-    public BigInteger encrypt(BigInteger message) {
-        System.out.println(name + " is encrypting...");
-        BigInteger N =
-                exponentMod.exponentMod(message, publicKey, modulus);
-        System.out.println(message);
-        System.out.println("Encrypts to");
-        System.out.println(N);
-        System.out.println();
-        return N;
-    }
 
-    public BigInteger encrypt(BigInteger message, BigInteger pubKey,
-                              BigInteger mod) {
-        System.out.println(name + " is encrypting...");
+    public BigInteger encryptRSA(BigInteger message, BigInteger pubKey,
+                                 BigInteger mod) {
+        System.out.println(name + " is encrypting with RSA...");
         BigInteger N = exponentMod.exponentMod(message, pubKey, mod);
         System.out.println(message);
         System.out.println("Encrypts to");
@@ -135,24 +133,26 @@ public class RSA {
         return N;
     }
 
-    public BigInteger encryptString(String messageString,
-                                 BigInteger pubKey,
-                              BigInteger mod) {
-        System.out.println(name + " is converting \"" + messageString +
-                "\" to numeric...");
+    public BigInteger encryptStringRSA(String messageString,
+                                       BigInteger pubKey,
+                                       BigInteger mod) {
+        System.out.println(name + " is converting the shared key \"" +
+                messageString + "\" to numeric...");
 
         BigInteger message =
                 convertNumeric.convertToNumeric(messageString);
 
-        System.out.println("The numeric representation of \"" + messageString + "\" is");
+        System.out.println(
+                "The numeric representation of \"" + messageString +
+                        "\" is");
         System.out.println(message);
         System.out.println();
 
-        return encrypt(message,pubKey,mod);
+        return encryptRSA(message, pubKey, mod);
     }
 
-    public BigInteger decrypt(BigInteger cipherText) {
-        System.out.println(name + " is decrypting...");
+    public BigInteger decryptRSA(BigInteger cipherText) {
+        System.out.println(name + " is decrypting with RSA...");
         BigInteger M = exponentMod
                 .exponentMod(cipherText, privateKey, modulus);
         System.out.println(cipherText);
@@ -163,33 +163,20 @@ public class RSA {
         return M;
     }
 
-    public String decryptString(BigInteger cipherText) {
-        BigInteger M = decrypt(cipherText);
+    public String decryptStringRSA(BigInteger cipherText) {
+        BigInteger M = decryptRSA(cipherText);
         System.out.println(name + " is converting " + M + " back to a" +
                 " String...");
 
         String messageString = convertNumeric.convertToString(M);
 
-        System.out.println("The String is");
+        System.out.println("The shared key is");
         System.out.println("\"" + messageString + "\"");
         System.out.println();
 
         return messageString;
     }
 
-    public BigInteger decrypt(BigInteger cipherText,
-                              BigInteger privateKey,
-                              BigInteger modulus) {
-        System.out.println(name + " is decrypting...");
-        BigInteger M = exponentMod
-                .exponentMod(cipherText, privateKey, modulus);
-        System.out.println(cipherText);
-        System.out.println("Decrypts to");
-        System.out.println(M);
-        System.out.println();
-        sharedKey = M;
-        return M;
-    }
 
     public BigInteger signMessage(BigInteger message) {
         System.out.println(name + " is signing the message ...");
@@ -203,41 +190,6 @@ public class RSA {
         System.out.println();
 
         return signature;
-    }
-
-    public BigInteger signMessage(BigInteger message,
-                                  BigInteger privateKey,
-                                  BigInteger modulus) {
-        System.out.println(name + " is signing the message ...");
-        System.out.println(message);
-
-        BigInteger signature =
-                exponentMod.exponentMod(message, privateKey, modulus);
-
-        System.out.println("The signature is");
-        System.out.println(signature);
-        System.out.println();
-
-        return signature;
-    }
-
-    public boolean verifySignature(BigInteger signature,
-                                   BigInteger message) {
-        if (exponentMod.exponentMod(signature, publicKey, modulus)
-                .compareTo(message) == 0) {
-            System.out.println(signature);
-            System.out.println("Is a valid signature for the message");
-            System.out.println(message);
-            System.out.println();
-            return true;
-        } else {
-            System.out.println(signature);
-            System.out.println(
-                    "Is NOT a valid signature for the " + "message");
-            System.out.println(message);
-            System.out.println();
-            return false;
-        }
     }
 
     public boolean verifySignature(BigInteger signature,
@@ -302,6 +254,56 @@ public class RSA {
         return primes;
     }
 
+    public BigInteger encryptXOR(BigInteger message) {
+        System.out.println(name + " is encrypting with bitwise XOR...");
+        BigInteger N = bitwiseXOR.encrypt(message, sharedKey);
+        System.out.println(message);
+        System.out.println("Encrypts to");
+        System.out.println(N);
+        System.out.println();
+        return N;
+    }
+
+    public BigInteger encryptStringXOR(String messageString) {
+        System.out.println(name + " is converting the message \"" +
+                messageString + "\" to numeric...");
+
+        BigInteger message =
+                convertNumeric.convertToNumeric(messageString);
+
+        System.out.println(
+                "The numeric representation of \"" + messageString +
+                        "\" is");
+        System.out.println(message);
+        System.out.println();
+
+        return encryptXOR(message);
+    }
+
+    public BigInteger decryptXOR(BigInteger ciphertext) {
+        System.out.println(name + " is decrypting with bitwise XOR...");
+        BigInteger N = bitwiseXOR.decrypt(ciphertext, sharedKey);
+        System.out.println(ciphertext);
+        System.out.println("Decrypts to");
+        System.out.println(N);
+        System.out.println();
+        return N;
+    }
+
+    public String decryptStringXOR(BigInteger cipherText) {
+        BigInteger M = decryptXOR(cipherText);
+        System.out.println(name + " is converting " + M + " back to a" +
+                " String...");
+
+        String messageString = convertNumeric.convertToString(M);
+
+        System.out.println("The message is");
+        System.out.println("\"" + messageString + "\"");
+        System.out.println();
+
+        return messageString;
+    }
+
 
     public static void main(String[] args) {
         RSA alice = new RSA("Alice");
@@ -316,12 +318,12 @@ public class RSA {
 
 
         BigInteger cipherText =
-                alice.encryptString(sharedKey, bob.getPublicKey(),
+                alice.encryptStringRSA(sharedKey, bob.getPublicKey(),
                         bob.getModulus());
         BigInteger signature = alice.signMessage(cipherText);
 
 
-        bob.decryptString(cipherText);
+        bob.decryptStringRSA(cipherText);
         bob.verifySignature(signature, cipherText, alice.getPublicKey(),
                 alice.getModulus());
     }
