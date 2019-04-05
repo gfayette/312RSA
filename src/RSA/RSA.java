@@ -15,7 +15,7 @@ public class RSA {
     private FactorModulus factorModulus;
     private ExponentMod exponentMod;
     private ConvertNumeric convertNumeric;
-    private bitwiseXOR bitwiseXOR;
+    private BitwiseXOR bitwiseXOR;
 
     public RSA(String n) {
         name = n;
@@ -24,7 +24,7 @@ public class RSA {
         factorModulus = new FactorModulus();
         exponentMod = new ExponentMod();
         convertNumeric = new ConvertNumeric();
-        bitwiseXOR = new bitwiseXOR();
+        bitwiseXOR = new BitwiseXOR();
     }
 
     public RSA(BigInteger pubKey, BigInteger priKey, BigInteger mod) {
@@ -33,7 +33,7 @@ public class RSA {
         factorModulus = new FactorModulus();
         exponentMod = new ExponentMod();
         convertNumeric = new ConvertNumeric();
-        bitwiseXOR = new bitwiseXOR();
+        bitwiseXOR = new BitwiseXOR();
 
         publicKey = pubKey;
         privateKey = priKey;
@@ -196,6 +196,7 @@ public class RSA {
                                    BigInteger message,
                                    BigInteger publicKey,
                                    BigInteger modulus) {
+        System.out.println(name + " is verifying the signature ...");
         if (exponentMod.exponentMod(signature, publicKey, modulus)
                 .compareTo(message) == 0) {
             System.out.println(signature);
@@ -316,12 +317,10 @@ public class RSA {
 
         String sharedKey = "Hello World";
 
-
         BigInteger cipherText =
                 alice.encryptStringRSA(sharedKey, bob.getPublicKey(),
                         bob.getModulus());
         BigInteger signature = alice.signMessage(cipherText);
-
 
         bob.decryptStringRSA(cipherText);
         bob.verifySignature(signature, cipherText, alice.getPublicKey(),

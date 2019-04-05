@@ -2,7 +2,7 @@ package RSA;
 
 import java.math.BigInteger;
 
-public class bitwiseXOR {
+public class BitwiseXOR {
 
 
     public String convertToBinary(BigInteger numeric) {
@@ -83,7 +83,7 @@ public class bitwiseXOR {
 
 
     public static void main(String[] args) {
-        bitwiseXOR x = new bitwiseXOR();
+        BitwiseXOR x = new BitwiseXOR();
         BigInteger plainText = new BigInteger(
                 "1234567890123456789099999");
         BigInteger key = new BigInteger("123457");
