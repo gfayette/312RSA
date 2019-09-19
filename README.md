@@ -25,6 +25,7 @@ Public key: 123456791
 Private key: 2129060804205970286613951911
 Modulus: 3360486630215908407039064553
 
+
 -----------Exchanging key-----------
 
 Alice is converting the shared key "Shared key" to numeric...
@@ -55,6 +56,7 @@ Bob is converting 1123366213303089525843 back to a String...
 The shared key is
 "Shared key"
 
+
 -----------Exchanging message-----------
 
 Alice is converting the message "Message 1" to numeric...
@@ -84,6 +86,7 @@ Decrypts to
 Bob is converting 3549284274399933133 back to a String...
 The message is
 "Message 1"
+
 
 -----------Exchanging message-----------
 
