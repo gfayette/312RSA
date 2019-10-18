@@ -116,7 +116,7 @@ public class RSA {
 
         System.out.println("p = " + p);
         System.out.println("q = " + q);
-        System.out.println("It took " + elapsedSeconds + " seconds to" + " generate these prime numbers");
+        //System.out.println("It took " + elapsedSeconds + " seconds to" + " generate these prime numbers");
         System.out.println();
 
         return keysFromPrimes(p, q, minPubKey);
