@@ -7,24 +7,21 @@ Sample Output:
 
 Generating primes greater than 12345678901234...
 p = 12345678901253
-q = 1629629614965397
-It took 1.227 seconds to generate these prime numbers
+q = 5185185138526279
 
 Generating keys for Alice with minimum public key size 1234567894...
-Public key: 1234567903
-Private key: 7365055544325771688837105903
-Modulus: 20118883954335351880574942441
+Public key: 1234567895
+Private key: 57286162354607100261026675351
+Modulus: 64014630763794496724386527587
 
 Generating primes greater than 2234567890123...
 p = 2234567890129
-q = 1503864190056857
-It took 1.94 seconds to generate these prime numbers
+q = 969802464316051
 
 Generating keys for Bob with minimum public key size 123456789...
 Public key: 123456791
-Private key: 2129060804205970286613951911
-Modulus: 3360486630215908407039064553
-
+Private key: 291660537904385214090611111
+Modulus: 2167089446528622894099160579
 
 -----------Exchanging key-----------
 
@@ -35,27 +32,26 @@ The numeric representation of "Shared key" is
 Alice is encrypting with RSA...
 1123366213303089525843
 Encrypts to
-2373932912349398538526477834
+1861573995300283437234894661
 
 Alice is signing the message ...
-2373932912349398538526477834
+1861573995300283437234894661
 The signature is
-5519014902366833196379383390
+33548698120675405680982121943
 
 Bob is verifying the signature ...
-5519014902366833196379383390
+33548698120675405680982121943
 Is a valid signature for the message
-2373932912349398538526477834
+1861573995300283437234894661
 
 Bob is decrypting with RSA...
-2373932912349398538526477834
+1861573995300283437234894661
 Decrypts to
 1123366213303089525843
 
 Bob is converting 1123366213303089525843 back to a String...
 The shared key is
 "Shared key"
-
 
 -----------Exchanging message-----------
 
@@ -71,10 +67,10 @@ Encrypts to
 Alice is signing the message ...
 3401199030868631287
 The signature is
-12422464668613922815924199819
+37738288054701499954967546172
 
 Bob is verifying the signature ...
-12422464668613922815924199819
+37738288054701499954967546172
 Is a valid signature for the message
 3401199030868631287
 
@@ -86,7 +82,6 @@ Decrypts to
 Bob is converting 3549284274399933133 back to a String...
 The message is
 "Message 1"
-
 
 -----------Exchanging message-----------
 
@@ -102,10 +97,10 @@ Encrypts to
 Bob is signing the message ...
 3185026248754847479
 The signature is
-3300433758756732648375947016
+1175666778308456391353766194
 
 Alice is verifying the signature ...
-3300433758756732648375947016
+1175666778308456391353766194
 Is a valid signature for the message
 3185026248754847479
 
@@ -117,6 +112,3 @@ Decrypts to
 Alice is converting 3621341868437861069 back to a String...
 The message is
 "Message 2"
-
-
-Process finished with exit code 0
