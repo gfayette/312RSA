@@ -3,7 +3,7 @@ package PGP;
 import java.math.BigInteger;
 
 /**
- * MTH312PGP
+ * PGP Project
  * GeneratePrimes Class
  *
  * This class generates prime numbers used for RSA encryption.

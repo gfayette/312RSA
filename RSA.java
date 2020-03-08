@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 /**
- * MTH312PGP
+ * PGP Project
  * RSA Class
  *
  * This class implements the RSA cryptosystem. It contains methods for generating key pairs, encrypting, decrypting,

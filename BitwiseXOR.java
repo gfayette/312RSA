@@ -3,7 +3,7 @@ package PGP;
 import java.math.BigInteger;
 
 /**
- * MTH312PGP
+ * PGP Project
  * BitwiseXOR Class
  *
  * This class implements bitwise XOR encryption.

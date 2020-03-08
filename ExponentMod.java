@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
- * MTH312PGP
+ * PGP Project
  * ExponentMod Class
  *
  * This class is used to efficiently preform modulus operations on exponential expressions.

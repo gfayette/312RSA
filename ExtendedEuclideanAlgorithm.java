@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 /**
- * MTH312PGP
+ * PGP Project
  * ExtendedEuclideanAlgorithm Class
  *
  * This class implements the Extended Euclidean Algorithm which is used for RSA encryption.

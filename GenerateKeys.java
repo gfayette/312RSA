@@ -3,7 +3,7 @@ package PGP;
 import java.math.BigInteger;
 
 /**
- * MTH312PGP
+ * PGP Project
  * GenerateKeys Class
  *
  * This class uses the extended euclidean algorithm to generate keys for RSA encryption.

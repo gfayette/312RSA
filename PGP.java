@@ -3,7 +3,7 @@ package PGP;
 import java.math.BigInteger;
 
 /**
- * MTH312PGP
+ * PGP Project
  * PGP Class
  *
  * This class implements PGP using RSA and bitwise XOR encryption. The main method creates two RSA objects "Alice"

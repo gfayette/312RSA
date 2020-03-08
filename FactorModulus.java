@@ -3,7 +3,7 @@ package PGP;
 import java.math.BigInteger;
 
 /**
- * MTH312PGP
+ * PGP Project
  * FactorModulus Class
  *
  * This class uses Fermat's factoring algorithm to factor numbers which are a product of two primes. This can be used

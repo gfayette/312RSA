@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 /**
- * MTH312PGP
+ * PGP Project
  * ConvertNumeric Class
  *
  * This class is used to convert Strings into their numeric representation and vice-versa.
