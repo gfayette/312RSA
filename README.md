@@ -1,4 +1,4 @@
-# MTH312PGP
+# PGP Implementation
 This program implements PGP using RSA and Bitwise XOR encryption. All encryption operations were written from scratch.
 
 Sample Output:
